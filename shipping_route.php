@@ -9,7 +9,13 @@ if ($direct) {
     if (!$primary) {
         echo "no shipment found.";
     } else if ($primary['origin'] != $item['origin']) {
-        $_SESSION['route']['primary'] = $primary['shipment_id'];
+        $_SESSION['route']['primary'] = [
+            'shipment_id' => $primary['shipment_id'],
+            'origin' => $primary['origin'],
+            'destination' => $primary['destination'],
+            'fee' => $primary['import_Fee'],
+            'transhipper' => $primary['transhipper_id']
+        ];
         $secondary = schedule::getNextShipmentByLocations($pdo, $item['origin'], $primary['origin']);
         if(!$secondary) {
             echo "no shipment found.";
