@@ -14,9 +14,21 @@ if ($direct) {
         if(!$secondary) {
             echo "no shipment found.";
         } else {
-            $_SESSION['route']['secondary'] = $primary['shipment_id'];
+            $_SESSION['route']['secondary'] = [
+                'shipment_id' => $secondary['shipment_id'],
+                'origin' => $secondary['origin'],
+                'destination' => $secondary['destination'],
+                'fee' => $secondary['import_Fee'],
+                'transhipper' => $secondary['transhipper_id']
+            ];
         }
     } else {
-        $_SESSION['route'] = $primary['shipment_id'];
+        $_SESSION['route'] = [
+            'shipment_id' => $primary['shipment_id'],
+            'origin' => $primary['origin'],
+            'destination' => $primary['destination'],
+            'fee' => $primary['import_Fee'],
+            'transhipper' => $primary['transhipper_id']
+        ];
     }
 }
